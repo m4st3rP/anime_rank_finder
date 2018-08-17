@@ -17,7 +17,7 @@ for i in range(len(ranking)):
 
 while ranking:
     index = random.randrange(0, len(ranking))
-    print("Is the anime better than {}? Enter y(es), n(o) or d(on't know).".format(ranking[index].strip()))
+    print('Is the anime better than "{}"? Enter y(es), n(o) or d(on\'t know).'.format(ranking[index].strip()))
     inp = input()
     if inp == "y":
         score -= 0.5
@@ -30,4 +30,4 @@ if score <= 0.0:
 elif score >= float(ranking_original_length):
     print("The anime is at the bottom.")
 else:
-    print("The anime is between {} and {}".format(original_ranking[int(score - 0.5)].strip(), original_ranking[int(score + 0.5)].strip()))
+    print('The anime is between "{}" and "{}"'.format(original_ranking[int(score - 0.5)].strip(), original_ranking[int(score + 0.5)].strip()))
