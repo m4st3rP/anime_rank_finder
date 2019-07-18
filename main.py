@@ -6,7 +6,8 @@ original_ranking = {}
 with open("list.txt", mode="r", encoding="utf-8") as f:
     line = f.readline()
     while line:
-        ranking.append(line)
+        if line:  # check if line is empty
+            ranking.append(line)
         line = f.readline()
 
 ranking_original_length = len(ranking)
@@ -17,17 +18,26 @@ for i in range(len(ranking)):
 
 while ranking:
     index = random.randrange(0, len(ranking))
-    print('Is the anime better than "{}"? Enter y(es), n(o) or d(on\'t know).'.format(ranking[index].strip()))
+    print('Is it better than "{}"? Enter y(es), n(o) or d(on\'t know).'.format(ranking[index].strip()))
     inp = input()
-    if inp == "y":
+    if inp[0].lower() == "y":
         score -= 0.5
-    elif inp == "n":
+        print("You selected yes.")
+    elif inp[0].lower() == "n":
         score += 0.5
+        print("You selected no.")
+    else:
+        print('You selected "don\'t know"')
     ranking.remove(ranking[index])
 
 if score <= 0.0:
-    print("The anime is at the top.")
+    output = "It is at the top."
 elif score >= float(ranking_original_length):
-    print("The anime is at the bottom.")
+    output = "It is at the bottom."
 else:
-    print('The anime is between "{}" and "{}"'.format(original_ranking[int(score - 0.5)].strip(), original_ranking[int(score + 0.5)].strip()))
+    output = 'It is between "{}" and "{}"'.format(original_ranking[int(score - 0.5)].strip(), original_ranking[int(score + 0.5)].strip())
+
+with open("output.txt", mode="w", encoding="utf-8") as f:
+    f.write(output)
+
+print(output)
